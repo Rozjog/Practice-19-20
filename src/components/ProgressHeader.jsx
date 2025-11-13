@@ -1,7 +1,8 @@
-function ProgressHeader({ technologies }) {
+import './ProgressHeader.css';
+
+function ProgressHeader({ technologies, progress }) {
   const total = technologies.length;
   const completed = technologies.filter(t => t.status === 'completed').length;
-  const progress = total > 0 ? (completed / total) * 100 : 0;
 
   return (
     <div className="progress-header">
@@ -12,7 +13,7 @@ function ProgressHeader({ technologies }) {
           style={{ width: `${progress}%` }}
         ></div>
       </div>
-      <p>{completed} из {total} технологий освоено ({Math.round(progress)}%)</p>
+      <p>{completed} из {total} технологий освоено ({progress}%)</p>
     </div>
   );
 }
