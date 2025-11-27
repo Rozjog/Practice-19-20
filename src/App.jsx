@@ -61,7 +61,7 @@ function App() {
   });
 
   return (
-    <Router basename={import.meta.env.BASE_URL || '/'}>
+    <Router>
       <div className="App">
         <Navigation
           isLoggedIn={isLoggedIn}
