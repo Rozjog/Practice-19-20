@@ -32,6 +32,7 @@ function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
+  console.log('BASE_URL:', import.meta.env.BASE_URL);
 
   useEffect(() => {
     const loggedIn = localStorage.getItem('isLoggedIn') === 'true';
@@ -61,7 +62,7 @@ function App() {
   });
 
   return (
-    <Router basename={import.meta.env.BASE_URL}>
+    <Router>
       <div className="App">
         <Navigation
           isLoggedIn={isLoggedIn}
@@ -119,8 +120,12 @@ function App() {
               onNotesChange={updateNotes}
             />
           } />
-          <Route path="/statistics" element={<Statistics technologies={technologies} />} />
-
+          <Route path="/statistics" element={
+            <div>
+              {console.log('BASE_URL для /statistics:', window.location.pathname)}
+              <Statistics technologies={technologies} />
+            </div>
+          } />
           <Route path="/login" element={<Login onLogin={handleLogin} />} />
 
           <Route path="/settings" element={

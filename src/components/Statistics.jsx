@@ -7,7 +7,7 @@ function Statistics({ technologies }) {
   const inProgress = technologies.filter(t => t.status === 'in-progress').length;
   const completed = technologies.filter(t => t.status === 'completed').length;
   const completionRate = total > 0 ? Math.round((completed / total) * 100) : 0;
-
+  console.log('BASE_URL:', import.meta.env.BASE_URL);
   const statusData = [
     { status: 'Не начато', count: notStarted, color: '#e53e3e' },
     { status: 'В процессе', count: inProgress, color: '#d69e2e' },
@@ -18,9 +18,10 @@ function Statistics({ technologies }) {
 
   return (
     <div className="statistics-page">
-      <h2>Статистика в реальном времени</h2>
-      
+
+
       <div className="stats-main">
+        <h2>Статистика в реальном времени</h2>
         <div className="stats-cards-horizontal">
           <div className="stat-card-center">
             <div className="stat-number-large">{total}</div>
@@ -50,12 +51,12 @@ function Statistics({ technologies }) {
             {statusData.map((item, index) => (
               <div key={index} className="bar-row">
                 <div className="bar-info">
-                  <div className="bar-color-indicator" style={{backgroundColor: item.color}}></div>
+                  <div className="bar-color-indicator" style={{ backgroundColor: item.color }}></div>
                   <span className="bar-title">{item.status}</span>
                   <span className="bar-count">{item.count}</span>
                 </div>
                 <div className="bar-track">
-                  <div 
+                  <div
                     className="bar-progress"
                     style={{
                       width: `${(item.count / maxCount) * 100}%`,
