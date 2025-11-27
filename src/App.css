@@ -1,4 +1,4 @@
-.body {
+body {
   align-items: center;
   display: flex;
   justify-content: center;
@@ -87,6 +87,7 @@ h1 {
   cursor: pointer;
   font-weight: 600;
   transition: all 0.3s ease;
+  margin: 5px;
 }
 
 .action-btn:hover {

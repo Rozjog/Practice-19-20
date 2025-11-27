@@ -61,7 +61,7 @@ function App() {
   });
 
   return (
-    <Router basename={import.meta.env.BASE_URL}>
+    <Router basename={import.meta.env.BASE_URL || '/'}>
       <div className="App">
         <Navigation
           isLoggedIn={isLoggedIn}
@@ -74,8 +74,9 @@ function App() {
             <div className="main-container">
               <div className="page-content">
                 <h1>Дорожная карта изучения технологий</h1>
-                <ProgressHeader technologies={technologies} progress={progress} />
+
                 <Statistics technologies={technologies} />
+                <ProgressHeader technologies={technologies} progress={progress} />
 
                 <TechnologySearch
                   onSearch={setSearchQuery}
@@ -83,7 +84,7 @@ function App() {
                 />
 
                 <ApiTechnologyImporter addTechnology={addTechnology} />
-                
+
                 <QuickActions
                   markAllCompleted={markAllCompleted}
                   resetAllStatuses={resetAllStatuses}

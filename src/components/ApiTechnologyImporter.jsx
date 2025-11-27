@@ -1,4 +1,3 @@
-// components/ApiTechnologyImporter.js
 import { useState } from 'react';
 
 function ApiTechnologyImporter({ addTechnology }) {
@@ -8,8 +7,7 @@ function ApiTechnologyImporter({ addTechnology }) {
     const importFromGitHub = async () => {
         try {
             setLoading(true);
-            
-            // Получаем популярные JavaScript репозитории с GitHub
+
             const response = await fetch('https://api.github.com/search/repositories?q=language:javascript&sort=stars&per_page=4');
             
             if (!response.ok) {
@@ -17,8 +15,7 @@ function ApiTechnologyImporter({ addTechnology }) {
             }
 
             const data = await response.json();
-            
-            // Преобразуем репозитории в формат технологий
+
             const technologiesToAdd = data.items.map((repo, index) => {
                 const categories = ['Frontend', 'Backend', 'Tools', 'Libraries'];
                 const difficulties = ['beginner', 'intermediate', 'advanced'];
@@ -34,14 +31,12 @@ function ApiTechnologyImporter({ addTechnology }) {
                 };
             });
 
-            // Добавляем каждую технологию
             for (const techData of technologiesToAdd) {
                 await addTechnology(techData);
             }
 
             setImportedCount(technologiesToAdd.length);
-            
-            // Сбрасываем счетчик через 3 секунды
+
             setTimeout(() => setImportedCount(0), 3000);
 
         } catch (error) {
@@ -56,13 +51,13 @@ function ApiTechnologyImporter({ addTechnology }) {
         <div className="api-importer">
             <h3>Импорт технологий из GitHub</h3>
             
-            <div className="import-info">
+            {/* <div className="import-info">
                 <p>
                     <strong>Источник:</strong> GitHub API<br />
                     <strong>Данные:</strong> Популярные JavaScript проекты<br />
                     <strong>Формат:</strong> Полнофункциональные карточки
                 </p>
-            </div>
+            </div> */}
 
             <button
                 onClick={importFromGitHub}
@@ -74,7 +69,7 @@ function ApiTechnologyImporter({ addTechnology }) {
 
             {importedCount > 0 && (
                 <div className="success-message">
-                    ✅ Успешно добавлено {importedCount} технологий!
+                    Успешно добавлено {importedCount} технологий!
                 </div>
             )}
         </div>

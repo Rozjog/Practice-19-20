@@ -1,4 +1,3 @@
-// hooks/useTechnologiesApi.js
 import { useState, useEffect, useCallback } from 'react';
 
 function useTechnologiesApi() {
@@ -6,13 +5,12 @@ function useTechnologiesApi() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    // Функция для преобразования данных API в формат карточек технологий
     const transformApiDataToTechnologies = (apiData) => {
         const categories = ['React', 'Hooks', 'JavaScript', 'CSS', 'Backend'];
         const difficulties = ['beginner', 'intermediate', 'advanced'];
         
         return apiData.map((item, index) => ({
-            id: item.id + 1000, // Добавляем 1000 чтобы избежать конфликта с существующими ID
+            id: item.id + 1000,
             title: item.title.length > 20 ? item.title.substring(0, 20) + '...' : item.title,
             description: item.body.length > 100 ? item.body.substring(0, 100) + '...' : item.body,
             status: 'not-started',
@@ -28,7 +26,6 @@ function useTechnologiesApi() {
         }));
     };
 
-    // Загрузка технологий из API
     const fetchTechnologiesFromApi = useCallback(async () => {
         try {
             setLoading(true);
@@ -55,7 +52,6 @@ function useTechnologiesApi() {
         }
     }, []);
 
-    // Добавление технологий из API в основное хранилище
     const addApiTechnologies = useCallback(async (addTechnologyFunc) => {
         try {
             if (apiTechnologies.length === 0) {
@@ -66,7 +62,7 @@ function useTechnologiesApi() {
                 ? apiTechnologies 
                 : await fetchTechnologiesFromApi();
 
-            // Добавляем каждую технологию в основное хранилище
+
             const addedTechnologies = [];
             for (const tech of technologiesToAdd) {
                 const addedTech = await addTechnologyFunc({

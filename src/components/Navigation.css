@@ -8,6 +8,9 @@
   left: 0;
   right: 0;
   z-index: 1000;
+  align-items: center;
+  display: flex;
+  justify-content: center;
 }
 
 .nav-content {
@@ -17,12 +20,14 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
+  justify-content: center;
 }
 
 .nav-brand h2 {
   margin: 0;
   color: #2d3748;
   font-size: 1.5rem;
+  margin: 10px;
 }
 
 .nav-brand a {
