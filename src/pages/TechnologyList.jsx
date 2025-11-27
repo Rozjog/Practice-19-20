@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 function TechnologyList() {
     const [technologies, setTechnologies] = useState([]);
-    // Загружаем технологии из localStorage
     useEffect(() => {
         const saved = localStorage.getItem('technologies');
         if (saved) {
