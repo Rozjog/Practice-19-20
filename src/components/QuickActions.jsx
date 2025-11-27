@@ -9,7 +9,6 @@ function QuickActions({ markAllCompleted, resetAllStatuses, pickRandomTech, tech
       technologies: technologies
     };
     const dataStr = JSON.stringify(data, null, 2);
-    // Здесь можно добавить логику для скачивания файла
     console.log('Данные для экспорта:', dataStr);
     setShowExportModal(true);
   };

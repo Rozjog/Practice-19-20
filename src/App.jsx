@@ -1,25 +1,54 @@
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import useTechnologies from './components/useTechnologies';
 import TechnologyCard from './components/TechnologyCard';
 import ProgressHeader from './components/ProgressHeader';
 import Statistics from './components/Statistics';
 import QuickActions from './components/QuickActions';
 import FilterButtons from './components/FilterButtons';
+import Navigation from './components/Navigation';
+import TechnologyList from './pages/TechnologyList';
+import TechnologyDetail from './pages/TechnologyDetail';
+import Settings from './pages/Settings';
+import Login from './pages/Login';
+import ProtectedRoute from './components/ProtectedRoute';
+import ApiTechnologyImporter from './components/ApiTechnologyImporter';
+import TechnologySearch from './components/TechnologySearch';
 
 function App() {
-  const { 
-    technologies, 
-    updateStatus, 
-    updateNotes, 
-    markAllCompleted, 
+  const {
+    technologies,
+    updateStatus,
+    updateNotes,
+    markAllCompleted,
     resetAllStatuses,
     pickRandomTech,
-    progress 
+    addTechnology,
+    progress
   } = useTechnologies();
 
   const [activeFilter, setActiveFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState('');
+
+  useEffect(() => {
+    const loggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    const user = localStorage.getItem('username') || '';
+    setIsLoggedIn(loggedIn);
+    setUsername(user);
+  }, []);
+
+  const handleLogin = (user) => {
+    setIsLoggedIn(true);
+    setUsername(user);
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setUsername('');
+  };
 
   const filteredTechnologies = technologies.filter(tech => {
     const searchMatch = searchQuery === '' ||
@@ -32,45 +61,75 @@ function App() {
   });
 
   return (
-    <div className="App">
-      <h1>Дорожная карта изучения технологий</h1>
-
-      <ProgressHeader technologies={technologies} progress={progress} />
-      <Statistics technologies={technologies} />
-
-      {/* Простой поиск */}
-      <div className="search-section">
-        <input
-          type="text"
-          placeholder="Поиск по технологиям..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+    <Router>
+      <div className="App">
+        <Navigation
+          isLoggedIn={isLoggedIn}
+          username={username}
+          onLogout={handleLogout}
         />
-        <div>Найдено: {filteredTechnologies.length}</div>
+
+        <Routes>
+          <Route path="/" element={
+            <div className="main-container">
+              <div className="page-content">
+                <h1>Дорожная карта изучения технологий</h1>
+                <ProgressHeader technologies={technologies} progress={progress} />
+                <Statistics technologies={technologies} />
+
+                <TechnologySearch
+                  onSearch={setSearchQuery}
+                  searchQuery={searchQuery}
+                />
+
+                <ApiTechnologyImporter addTechnology={addTechnology} />
+                
+                <QuickActions
+                  markAllCompleted={markAllCompleted}
+                  resetAllStatuses={resetAllStatuses}
+                  pickRandomTech={pickRandomTech}
+                  technologies={technologies}
+                />
+
+                <FilterButtons
+                  activeFilter={activeFilter}
+                  setActiveFilter={setActiveFilter}
+                />
+
+                <div className="technologies-grid">
+                  {filteredTechnologies.map(tech => (
+                    <TechnologyCard
+                      key={tech.id}
+                      {...tech}
+                      onStatusChange={updateStatus}
+                      onNotesChange={updateNotes}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+          } />
+
+          <Route path="/technologies" element={<TechnologyList technologies={technologies} />} />
+          <Route path="/technology/:id" element={
+            <TechnologyDetail
+              technologies={technologies}
+              onStatusChange={updateStatus}
+              onNotesChange={updateNotes}
+            />
+          } />
+          <Route path="/statistics" element={<Statistics technologies={technologies} />} />
+
+          <Route path="/login" element={<Login onLogin={handleLogin} />} />
+
+          <Route path="/settings" element={
+            <ProtectedRoute isLoggedIn={isLoggedIn}>
+              <Settings onLogout={handleLogout} username={username} />
+            </ProtectedRoute>
+          } />
+        </Routes>
       </div>
-
-      <QuickActions
-        markAllCompleted={markAllCompleted}
-        resetAllStatuses={resetAllStatuses}
-        pickRandomTech={pickRandomTech}
-      />
-
-      <FilterButtons
-        activeFilter={activeFilter}
-        setActiveFilter={setActiveFilter}
-      />
-
-      <div className="technologies-grid">
-        {filteredTechnologies.map(tech => (
-          <TechnologyCard
-            key={tech.id}
-            {...tech}
-            onStatusChange={updateStatus}
-            onNotesChange={updateNotes}
-          />
-        ))}
-      </div>
-    </div>
+    </Router>
   );
 }
 

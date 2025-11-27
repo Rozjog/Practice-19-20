@@ -1,0 +1,148 @@
+.statistics-page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.statistics-page h2 {
+  text-align: center;
+  color: #2d3748;
+  margin-bottom: 30px;
+  font-size: 2rem;
+}
+
+.stats-main {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+}
+
+.stats-cards-horizontal {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.stat-card-center {
+  background: white;
+  padding: 25px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  min-width: 140px;
+  border: 2px solid #e2e8f0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-card-center:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.stat-card-center.highlight {
+  border-color: #4299e1;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.stat-card-center.highlight .stat-number-large {
+  color: white;
+}
+
+.stat-card-center.highlight .stat-label-center {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.stat-number-large {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #2d3748;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.stat-label-center {
+  font-size: 14px;
+  color: #718096;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+/* Секция графика */
+.chart-section {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+}
+
+.chart-section h3 {
+  text-align: center;
+  color: #2d3748;
+  margin-bottom: 25px;
+  font-size: 1.5rem;
+}
+
+.horizontal-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.bar-row {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.bar-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 150px;
+  justify-content: flex-start;
+}
+
+.bar-color-indicator {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.bar-title {
+  font-weight: 600;
+  color: #4a5568;
+  font-size: 14px;
+  min-width: 80px;
+}
+
+.bar-count {
+  font-weight: bold;
+  color: #2d3748;
+  font-size: 16px;
+  min-width: 30px;
+  text-align: right;
+}
+
+.bar-track {
+  flex: 1;
+  height: 25px;
+  background: #f7fafc;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+}
+
+.bar-progress {
+  height: 100%;
+  border-radius: 12px;
+  transition: width 0.8s ease;
+  min-width: 25px;
+}

@@ -1,0 +1,27 @@
+.login-form {
+  width: 300px;
+  margin: 50px auto;
+}
+
+.form-group {
+  margin: 10px 0;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
+.btn {
+  width: 100%;
+  padding: 10px;
+  background: blue;
+  color: white;
+  border: none;
+  margin: 10px 0;
+}
+
+.auth-switch {
+  text-align: center;
+}
