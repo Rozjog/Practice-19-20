@@ -120,10 +120,6 @@ function App() {
               <Route path="/" element={
                 <div className="main-container">
                   <div className="page-content">
-                    <div className="page-header">
-                      <h1>Дорожная карта изучения технологий</h1>
-                    </div>
-
                     <Statistics technologies={technologies} />
                     <ProgressHeader technologies={technologies} progress={progress} />
 
