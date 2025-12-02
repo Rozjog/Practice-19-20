@@ -1,8 +1,11 @@
+import ThemeToggle from '../components/ThemeToggle';
+
 function Settings() {
   return (
-    <div className="page">
+    <div className="App">
       <h1>Настройки</h1>
-      <p>Здесь будут настройки приложения</p>
+      <p>Сменить тему</p>
+      <ThemeToggle/>
     </div>
   );
 }

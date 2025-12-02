@@ -1,0 +1,133 @@
+.data-import-export {
+    background: var(--color-bg-primary);
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+    border: 1px solid var(--color-border);
+}
+
+.data-import-export h2 {
+    margin: 0 0 15px 0;
+    color: var(--color-text-primary);
+}
+
+.controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.control-btn, .file-input-label {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+    flex: 1;
+    min-width: 120px;
+}
+
+.export-btn {
+    background: var(--color-btn-success);
+    color: var(--color-text-inverse);
+}
+
+.file-input-label {
+    background: var(--color-btn-primary);
+    color: var(--color-text-inverse);
+    display: block;
+}
+
+.file-input-label input {
+    display: none;
+}
+
+.drop-zone {
+    border: 2px dashed var(--color-border);
+    border-radius: 6px;
+    padding: 30px;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 15px;
+    background: var(--color-bg-secondary);
+}
+
+.drop-zone.dragging {
+    border-color: var(--color-border-active);
+    background: var(--color-bg-tertiary);
+}
+
+.status-message {
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.status-message.success {
+    background: rgba(56, 161, 105, 0.15);
+    color: var(--color-status-completed);
+}
+
+.status-message.error {
+    background: rgba(229, 62, 62, 0.15);
+    color: var(--color-status-not-started);
+}
+
+.format-info {
+    background: var(--color-bg-secondary);
+    padding: 15px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.format-info h4 {
+    margin: 0 0 10px 0;
+    color: var(--color-text-primary);
+}
+
+.format-info ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.format-info li {
+    margin-bottom: 5px;
+    color: var(--color-text-secondary);
+}
+
+@media (max-width: 768px) {
+    .controls {
+        flex-direction: column;
+    }
+    
+    .control-btn, .file-input-label {
+        width: 100%;
+        min-width: unset;
+    }
+    
+    .data-import-export {
+        padding: 15px;
+    }
+    
+    .drop-zone {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .data-import-export {
+        padding: 10px;
+    }
+    
+    .format-info {
+        padding: 10px;
+        font-size: 13px;
+    }
+    
+    .drop-zone {
+        padding: 15px;
+    }
+}

@@ -1,15 +1,16 @@
 import { useState } from 'react';
+import { useNotification } from './NotificationContent';
 
-function ApiTechnologyImporter({ addTechnology }) {
+function ApiTechnologyImporter({ addTechnology, resetToInitial }) {
     const [loading, setLoading] = useState(false);
-    const [importedCount, setImportedCount] = useState(0);
+    const { showNotification } = useNotification();
 
     const importFromGitHub = async () => {
         try {
             setLoading(true);
 
             const response = await fetch('https://api.github.com/search/repositories?q=language:javascript&sort=stars&per_page=4');
-            
+
             if (!response.ok) {
                 throw new Error('Ошибка загрузки данных с GitHub');
             }
@@ -19,7 +20,7 @@ function ApiTechnologyImporter({ addTechnology }) {
             const technologiesToAdd = data.items.map((repo, index) => {
                 const categories = ['Frontend', 'Backend', 'Tools', 'Libraries'];
                 const difficulties = ['beginner', 'intermediate', 'advanced'];
-                
+
                 return {
                     title: repo.name,
                     description: repo.description || 'Описание отсутствует',
@@ -34,30 +35,26 @@ function ApiTechnologyImporter({ addTechnology }) {
             for (const techData of technologiesToAdd) {
                 await addTechnology(techData);
             }
-
-            setImportedCount(technologiesToAdd.length);
-
-            setTimeout(() => setImportedCount(0), 3000);
+            showNotification(`Успешно добавлено ${technologiesToAdd.length} технологий!`, 'success');
 
         } catch (error) {
             console.error('Ошибка импорта:', error);
-            alert(`Ошибка: ${error.message}`);
+            showNotification(`Ошибка: ${error.message}`, 'error');
         } finally {
             setLoading(false);
+        }
+    };
+
+    const handleResetToInitial = () => {
+        if (window.confirm('Вы уверены, что хотите сбросить все данные к начальному состоянию? Это действие нельзя отменить.')) {
+            resetToInitial();
+            showNotification('Данные сброшены к начальному состоянию', 'info');
         }
     };
 
     return (
         <div className="api-importer">
             <h3>Импорт технологий из GitHub</h3>
-            
-            {/* <div className="import-info">
-                <p>
-                    <strong>Источник:</strong> GitHub API<br />
-                    <strong>Данные:</strong> Популярные JavaScript проекты<br />
-                    <strong>Формат:</strong> Полнофункциональные карточки
-                </p>
-            </div> */}
 
             <button
                 onClick={importFromGitHub}
@@ -67,11 +64,12 @@ function ApiTechnologyImporter({ addTechnology }) {
                 {loading ? 'Загрузка...' : 'Добавить технологии из GitHub'}
             </button>
 
-            {importedCount > 0 && (
-                <div className="success-message">
-                    Успешно добавлено {importedCount} технологий!
-                </div>
-            )}
+            <button
+                onClick={handleResetToInitial}
+                className="reset-button"
+            >
+                Сбросить к начальным данным
+            </button>
         </div>
     );
 }

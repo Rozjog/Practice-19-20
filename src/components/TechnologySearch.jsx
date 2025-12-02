@@ -58,7 +58,7 @@ function TechnologySearch({ onSearch, searchQuery }) {
                         }}
                         className="clear-search"
                     >
-                        ×
+                        × Очистить
                     </button>
                 )}
             </div>

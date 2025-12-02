@@ -117,7 +117,7 @@ function useTechnologies() {
             await new Promise(resolve => setTimeout(resolve, 1000));
 
             console.log('Загрузка технологий завершена');
-            
+
         } catch (err) {
             setError('Ошибка загрузки технологий');
             throw err;
@@ -127,12 +127,13 @@ function useTechnologies() {
     };
 
 
-    const updateStatus = (techId) => {
+    const updateStatus = (techId, newStatus = null) => {
         setTechnologies(prev => prev.map(tech =>
             tech.id === techId ? {
                 ...tech,
-                status: tech.status === 'not-started' ? 'in-progress' :
-                        tech.status === 'in-progress' ? 'completed' : 'not-started'
+                status: newStatus !== null ? newStatus :
+                    (tech.status === 'not-started' ? 'in-progress' :
+                        tech.status === 'in-progress' ? 'completed' : 'not-started')
             } : tech
         ));
     };
@@ -186,7 +187,7 @@ function useTechnologies() {
 
     const searchTechnologies = (query) => {
         if (!query.trim()) return technologies;
-        
+
         return technologies.filter(tech =>
             tech.title.toLowerCase().includes(query.toLowerCase()) ||
             tech.description.toLowerCase().includes(query.toLowerCase()) ||
@@ -209,7 +210,7 @@ function useTechnologies() {
         const completed = technologies.filter(tech => tech.status === 'completed').length;
         const inProgress = technologies.filter(tech => tech.status === 'in-progress').length;
         const notStarted = technologies.filter(tech => tech.status === 'not-started').length;
-        
+
         const categories = [...new Set(technologies.map(tech => tech.category))];
         const difficulties = {
             beginner: technologies.filter(tech => tech.difficulty === 'beginner').length,
@@ -231,10 +232,10 @@ function useTechnologies() {
     const addResourceToTechnology = (techId, resource) => {
         setTechnologies(prev => prev.map(tech =>
             tech.id === techId
-                ? { 
-                    ...tech, 
-                    resources: [...(tech.resources || []), resource] 
-                  }
+                ? {
+                    ...tech,
+                    resources: [...(tech.resources || []), resource]
+                }
                 : tech
         ));
     };
@@ -245,7 +246,7 @@ function useTechnologies() {
                 ? {
                     ...tech,
                     resources: tech.resources.filter((_, index) => index !== resourceIndex)
-                  }
+                }
                 : tech
         ));
     };
@@ -269,7 +270,7 @@ function useTechnologies() {
         resetAllStatuses,
         pickRandomTech,
         resetToInitial,
-        
+
         searchTechnologies,
         filterByStatus,
         filterByCategory,
@@ -279,7 +280,7 @@ function useTechnologies() {
 
         getStatistics,
         progress: calculateProgress(),
-        
+
         refetch: fetchTechnologies
     };
 }

@@ -17,55 +17,57 @@ function Statistics({ technologies }) {
   const maxCount = Math.max(notStarted, inProgress, completed, 1);
 
   return (
-    <div className="statistics-page">
+    <div className='App'>
+      <div className="statistics-page">
 
 
-      <div className="stats-main">
-        <h2>Статистика в реальном времени</h2>
-        <div className="stats-cards-horizontal">
-          <div className="stat-card-center">
-            <div className="stat-number-large">{total}</div>
-            <div className="stat-label-center">Всего технологий</div>
+        <div className="stats-main">
+          <h2>Статистика в реальном времени</h2>
+          <div className="stats-cards-horizontal">
+            <div className="stat-card-center">
+              <div className="stat-number-large">{total}</div>
+              <div className="stat-label-center">Всего технологий</div>
+            </div>
+            <div className="stat-card-center">
+              <div className="stat-number-large">{notStarted}</div>
+              <div className="stat-label-center">Не начато</div>
+            </div>
+            <div className="stat-card-center">
+              <div className="stat-number-large">{inProgress}</div>
+              <div className="stat-label-center">В процессе</div>
+            </div>
+            <div className="stat-card-center">
+              <div className="stat-number-large">{completed}</div>
+              <div className="stat-label-center">Завершено</div>
+            </div>
+            <div className="stat-card-center highlight">
+              <div className="stat-number-large">{completionRate}%</div>
+              <div className="stat-label-center">Процент завершения</div>
+            </div>
           </div>
-          <div className="stat-card-center">
-            <div className="stat-number-large">{notStarted}</div>
-            <div className="stat-label-center">Не начато</div>
-          </div>
-          <div className="stat-card-center">
-            <div className="stat-number-large">{inProgress}</div>
-            <div className="stat-label-center">В процессе</div>
-          </div>
-          <div className="stat-card-center">
-            <div className="stat-number-large">{completed}</div>
-            <div className="stat-label-center">Завершено</div>
-          </div>
-          <div className="stat-card-center highlight">
-            <div className="stat-number-large">{completionRate}%</div>
-            <div className="stat-label-center">Процент завершения</div>
-          </div>
-        </div>
 
-        <div className="chart-section">
-          <h3>Распределение по статусам</h3>
-          <div className="horizontal-bars">
-            {statusData.map((item, index) => (
-              <div key={index} className="bar-row">
-                <div className="bar-info">
-                  <div className="bar-color-indicator" style={{ backgroundColor: item.color }}></div>
-                  <span className="bar-title">{item.status}</span>
-                  <span className="bar-count">{item.count}</span>
+          <div className="chart-section">
+            <h3>Распределение по статусам</h3>
+            <div className="horizontal-bars">
+              {statusData.map((item, index) => (
+                <div key={index} className="bar-row">
+                  <div className="bar-info">
+                    <div className="bar-color-indicator" style={{ backgroundColor: item.color }}></div>
+                    <span className="bar-title">{item.status}</span>
+                    <span className="bar-count">{item.count}</span>
+                  </div>
+                  <div className="bar-track">
+                    <div
+                      className="bar-progress"
+                      style={{
+                        width: `${(item.count / maxCount) * 100}%`,
+                        backgroundColor: item.color
+                      }}
+                    ></div>
+                  </div>
                 </div>
-                <div className="bar-track">
-                  <div
-                    className="bar-progress"
-                    style={{
-                      width: `${(item.count / maxCount) * 100}%`,
-                      backgroundColor: item.color
-                    }}
-                  ></div>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>

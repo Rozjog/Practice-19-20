@@ -1,0 +1,204 @@
+.deadline-manager {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    margin-top: 80px;
+}
+
+.deadline-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 30px;
+}
+
+.deadline-form {
+    background: var(--color-bg-secondary);
+    padding: 25px;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+}
+
+.tech-selection {
+    margin-top: 15px;
+}
+
+.select-all-btn {
+    background: var(--color-btn-secondary);
+    color: var(--color-text-inverse);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+.select-all-btn:hover {
+    background: var(--color-btn-secondary-hover);
+}
+
+.tech-list {
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: 10px;
+    background: var(--color-bg-primary);
+}
+
+.tech-checkbox {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 8px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+    border-bottom: 3px inset var(--color-border);
+}
+
+.tech-checkbox:hover {
+    background-color: var(--color-bg-tertiary);
+}
+
+.tech-checkbox input[type="checkbox"] {
+    margin-right: 10px;
+    width: 15px;
+}
+
+.current-deadline {
+    font-size: 0.9em;
+    color: var(--color-text-tertiary);
+    margin-left: 10px;
+}
+
+.deadlines-list {
+    background: var(--color-bg-secondary);
+    padding: 25px;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+}
+
+.tech-cards {
+    display: grid;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.tech-card {
+    background: var(--color-bg-primary);
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid var(--color-btn-primary);
+    box-shadow: var(--shadow-small);
+}
+
+.tech-card h3 {
+    margin: 0 0 10px 0;
+    color: var(--color-text-primary);
+}
+
+.deadline {
+    color: var(--color-status-not-started);
+    font-weight: bold;
+}
+
+.category,
+.status {
+    margin: 5px 0;
+    color: var(--color-text-secondary);
+}
+
+.btn-remove {
+    background: var(--color-btn-danger);
+    color: var(--color-text-inverse);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.btn-remove:hover {
+    background: var(--color-btn-danger-hover);
+}
+
+.status-message {
+    background: rgba(56, 161, 105, 0.15);
+    color: var(--color-status-completed);
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    border: 1px solid var(--color-status-completed);
+}
+
+.tech-checkbox:focus-within {
+    outline: 2px solid var(--color-border-active);
+}
+
+.btn-remove:focus {
+    outline: 2px solid var(--color-btn-danger);
+    outline-offset: 2px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--color-border);
+    margin-bottom: 15px;
+    background: var(--color-bg-primary);
+    color: var(--color-text-primary);
+}
+
+/* Адаптивность */
+@media (max-width: 1024px) {
+    .deadline-content {
+        gap: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .deadline-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .deadline-manager {
+        padding: 15px;
+    }
+    
+    .deadline-form,
+    .deadlines-list {
+        padding: 20px;
+    }
+    
+    .tech-cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .deadline-manager {
+        padding: 10px;
+    }
+    
+    .deadline-form,
+    .deadlines-list {
+        padding: 15px;
+    }
+    
+    .tech-card {
+        padding: 15px;
+    }
+    
+    .select-all-btn,
+    .btn-remove {
+        padding: 10px;
+        width: 100%;
+    }
+    
+    .tech-list {
+        max-height: 250px;
+    }
+}

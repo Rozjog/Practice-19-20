@@ -1,16 +1,13 @@
 .navigation {
-  background: white;
+  background: var(--color-bg-secondary);
   padding: 15px 0;
-  border-bottom: 2px solid #e2e8f0;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  border-bottom: 2px solid var(--color-border);
+  box-shadow: var(--shadow-small);
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-  align-items: center;
-  display: flex;
-  justify-content: center;
 }
 
 .nav-content {
@@ -20,67 +17,144 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
-  justify-content: center;
+  width: 100%;
+  flex-wrap: wrap;
 }
 
 .nav-brand h2 {
   margin: 0;
-  color: #2d3748;
+  color: var(--color-text-primary);
   font-size: 1.5rem;
-  margin: 10px;
 }
 
 .nav-brand a {
   text-decoration: none;
+  color: inherit;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
 .nav-menu {
   display: flex;
-  gap: 25px;
+  gap: 15px;
   list-style: none;
   margin: 0;
   padding: 0;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .nav-menu a {
   text-decoration: none;
-  color: #4a5568;
+  color: var(--color-text-secondary);
   font-weight: 500;
-  padding: 8px 16px;
+  padding: 8px 12px;
   border-radius: 6px;
   transition: all 0.3s ease;
+  white-space: nowrap;
 }
 
 .nav-menu a:hover {
-  background: #f7fafc;
-  color: #2d3748;
+  background: var(--color-bg-tertiary);
+  color: var(--color-text-primary);
 }
 
 .nav-menu a.active {
-  background: #4299e1;
-  color: white;
+  background: var(--color-btn-primary);
+  color: var(--color-text-inverse);
 }
 
 .user-info {
   display: flex;
   align-items: center;
   gap: 15px;
-  color: #4a5568;
+  color: var(--color-text-secondary);
+}
+
+.username-text {
+  font-weight: 500;
 }
 
 .logout-btn {
-  background: #e53e3e;
-  color: white;
+  background: var(--color-btn-danger);
+  color: var(--color-text-inverse);
   border: none;
   padding: 8px 16px;
   border-radius: 6px;
   cursor: pointer;
   font-weight: 500;
   transition: all 0.3s ease;
+  white-space: nowrap;
 }
 
 .logout-btn:hover {
-  background: #c53030;
+  background: var(--color-btn-danger-hover);
   transform: translateY(-1px);
+}
+
+/* Адаптивность: планшет и меньше */
+@media (max-width: 768px) {
+  .nav-content {
+    flex-direction: column;
+    gap: 15px;
+    padding: 10px 15px;
+  }
+  
+  .nav-right {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .nav-menu {
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .nav-menu a {
+    padding: 6px 10px;
+    font-size: 14px;
+  }
+  
+  .user-info {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+  
+  .logout-btn {
+    width: 100%;
+  }
+}
+
+/* Адаптивность: мобильные */
+@media (max-width: 480px) {
+  .nav-brand h2 {
+    font-size: 1.25rem;
+    text-align: center;
+  }
+  
+  .nav-menu {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .nav-menu li {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .nav-menu a {
+    display: block;
+    width: 100%;
+    padding: 10px;
+  }
+  
+  .username-text {
+    text-align: center;
+  }
 }

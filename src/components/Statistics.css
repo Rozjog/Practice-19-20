@@ -1,13 +1,14 @@
 .statistics-page {
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
   margin-top: 80px;
+  background: var(--color-bg-primary);
 }
 
 .statistics-page h2 {
   text-align: center;
-  color: #2d3748;
+  color: var(--color-text-primary);
   margin-bottom: 30px;
   font-size: 2rem;
 }
@@ -28,29 +29,29 @@
 }
 
 .stat-card-center {
-  background: white;
+  background: var(--color-bg-secondary);
   padding: 25px 20px;
   border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-card);
   text-align: center;
   min-width: 140px;
-  border: 2px solid #e2e8f0;
+  border: 2px solid var(--color-border);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .stat-card-center:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-card-hover);
 }
 
 .stat-card-center.highlight {
-  border-color: #4299e1;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  border-color: var(--color-border-active);
+  background: var(--color-bg-gradient);
+  color: var(--color-text-inverse);
 }
 
 .stat-card-center.highlight .stat-number-large {
-  color: white;
+  color: var(--color-text-inverse);
 }
 
 .stat-card-center.highlight .stat-label-center {
@@ -60,32 +61,31 @@
 .stat-number-large {
   font-size: 2.5rem;
   font-weight: bold;
-  color: #2d3748;
+  color: var(--color-text-primary);
   margin-bottom: 8px;
   display: block;
 }
 
 .stat-label-center {
   font-size: 14px;
-  color: #718096;
+  color: var(--color-text-tertiary);
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: 600;
 }
 
-/* Секция графика */
 .chart-section {
-  background: white;
+  background: var(--color-bg-secondary);
   padding: 30px;
   border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-card);
   width: 100%;
-  max-width: 600px;
+  max-width: 900px;
 }
 
 .chart-section h3 {
   text-align: center;
-  color: #2d3748;
+  color: var(--color-text-primary);
   margin-bottom: 25px;
   font-size: 1.5rem;
 }
@@ -119,14 +119,14 @@
 
 .bar-title {
   font-weight: 600;
-  color: #4a5568;
+  color: var(--color-text-secondary);
   font-size: 14px;
   min-width: 80px;
 }
 
 .bar-count {
   font-weight: bold;
-  color: #2d3748;
+  color: var(--color-text-primary);
   font-size: 16px;
   min-width: 30px;
   text-align: right;
@@ -135,7 +135,7 @@
 .bar-track {
   flex: 1;
   height: 25px;
-  background: #f7fafc;
+  background: var(--color-bg-tertiary);
   border-radius: 12px;
   overflow: hidden;
   position: relative;
@@ -146,4 +146,88 @@
   border-radius: 12px;
   transition: width 0.8s ease;
   min-width: 25px;
+}
+
+/* Адаптивность */
+@media (max-width: 1024px) {
+  .statistics-page {
+    max-width: 100%;
+    padding: 20px 15px;
+  }
+  
+  .chart-section {
+    padding: 25px 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .statistics-page {
+    margin-top: 60px;
+    padding: 15px 10px;
+  }
+  
+  .statistics-page h2 {
+    font-size: 1.75rem;
+    margin-bottom: 20px;
+  }
+  
+  .stats-cards-horizontal {
+    gap: 15px;
+  }
+  
+  .stat-card-center {
+    min-width: 120px;
+    padding: 20px 15px;
+  }
+  
+  .stat-number-large {
+    font-size: 2rem;
+  }
+  
+  .chart-section {
+    padding: 20px 15px;
+  }
+  
+  .bar-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .bar-info {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .bar-track {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .statistics-page h2 {
+    font-size: 1.5rem;
+  }
+  
+  .stats-cards-horizontal {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .stat-card-center {
+    width: 100%;
+    max-width: 250px;
+  }
+  
+  .stat-number-large {
+    font-size: 1.75rem;
+  }
+  
+  .stat-label-center {
+    font-size: 13px;
+  }
+  
+  .chart-section h3 {
+    font-size: 1.25rem;
+  }
 }
